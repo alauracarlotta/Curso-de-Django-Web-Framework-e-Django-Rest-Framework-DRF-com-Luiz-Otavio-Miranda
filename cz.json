@@ -74,33 +74,8 @@
         },
         {
           "type": "input",
-          "name": "message",
-          "message": "What is the scope of this change? (class or file name): (press [enter] to skip)"
-        },
-        {
-          "type": "input",
           "name": "show_message",
-          "message": "Do you want to add body message in commit?"
-        },
-        {
-          "type": "input",
-          "name": "show_message1",
-          "message": "Write a short and imperative summary of the code changes: (lower case and no period)"
-        },
-        {
-          "type": "input",
-          "name": "show_message1",
           "message": "Provide additional contextual information about the code changes: (press [enter] to skip)"
-        },
-        {
-          "type": "confirm",
-          "name": "choice",
-          "message": "Is this a BREAKING CHANGE? Correlates with MAJOR in SemVer"
-        },
-        {
-          "type": "input",
-          "name": "show_message1",
-          "message": "Footer. Information about Breaking Changes and reference issues that this commit closes: (press [enter] to skip)"
         }
       ]
     }
