@@ -95,7 +95,7 @@
         {
           "type": "confirm",
           "name": "choice",
-          "message": "Is this a BREAKING CHANGE? Correlates with MAJOR in SemVer (y/N)"
+          "message": "Is this a BREAKING CHANGE? Correlates with MAJOR in SemVer"
         },
         {
           "type": "input",
