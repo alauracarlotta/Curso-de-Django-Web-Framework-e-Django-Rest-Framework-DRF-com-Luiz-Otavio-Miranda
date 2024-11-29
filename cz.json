@@ -1,11 +1,29 @@
 {
   "commitizen": {
-    "name": "cz_conventional_commits",
+    "name": "cz_customize",
     "tag_format": "$version",
     "version_scheme": "semver",
     "version": "0.0.1",
     "update_changelog_on_bump": true,
+    "major_version_zero": true,
     "customize": {
+      "message_template": "{{change_type}}:{% if show_message %} {{message}}{% endif %}",
+      "example": "feature: this feature enable customize through config file",
+      "schema": "<type>: <body>",
+      "schema_pattern": "(feature|bug fix):(\\s.*)",
+      "bump_pattern": "^(break|new|fix|hotfix)",
+      "bump_map": {
+        "break": "MAJOR",
+        "new": "MINOR",
+        "fix": "PATCH",
+        "hotfix": "PATCH"
+      },
+      "change_type_order": ["BREAKING CHANGE", "feat", "fix", "refactor", "perf"],
+      "info_path": "cz_customize_info.txt",
+      "info": "This is customized info",
+      "commit_parser": "^(?P<change_type>feature|bug fix):\\s(?P<message>.*)?",
+      "changelog_pattern": "^(feature|bug fix)?(!)?",
+      "change_type_map": {"feature": "Feat", "bug fix": "Fix"},
       "questions": [
         {
           "type": "list",
@@ -51,7 +69,38 @@
               "value": "chore",
               "name": "chore: Other changes that don't modify src or test files"
             }
-          ]
+          ],
+          "message": "Select the type of change you are committing"
+        },
+        {
+          "type": "input",
+          "name": "message",
+          "message": "What is the scope of this change? (class or file name): (press [enter] to skip)"
+        },
+        {
+          "type": "input",
+          "name": "show_message",
+          "message": "Do you want to add body message in commit?"
+        },
+        {
+          "type": "input",
+          "name": "show_message1",
+          "message": "Write a short and imperative summary of the code changes: (lower case and no period)"
+        },
+        {
+          "type": "input",
+          "name": "show_message1",
+          "message": "Provide additional contextual information about the code changes: (press [enter] to skip)"
+        },
+        {
+          "type": "confirm",
+          "name": "choice",
+          "message": "Is this a BREAKING CHANGE? Correlates with MAJOR in SemVer (y/N)"
+        },
+        {
+          "type": "input",
+          "name": "show_message1",
+          "message": "Footer. Information about Breaking Changes and reference issues that this commit closes: (press [enter] to skip)"
         }
       ]
     }
