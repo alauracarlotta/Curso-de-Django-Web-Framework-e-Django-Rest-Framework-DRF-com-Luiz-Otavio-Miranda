@@ -1,83 +1,10 @@
 {
   "commitizen": {
-    "name": "cz_customize",
+    "name": "cz_conventional_commits",
     "tag_format": "$version",
-    "version_scheme": "semver",
-    "version": "0.0.1",
+    "version_scheme": "semver2",
+    "version_provider": "scm",
     "update_changelog_on_bump": true,
-    "major_version_zero": true,
-    "customize": {
-      "message_template": "{{change_type}}:{% if show_message %} {{message}}{% endif %}",
-      "example": "feature: this feature enable customize through config file",
-      "schema": "<type>: <body>",
-      "schema_pattern": "(feature|bug fix):(\\s.*)",
-      "bump_pattern": "^(break|new|fix|hotfix)",
-      "bump_map": {
-        "break": "MAJOR",
-        "new": "MINOR",
-        "fix": "PATCH",
-        "hotfix": "PATCH"
-      },
-      "change_type_order": ["BREAKING CHANGE", "feat", "fix", "refactor", "perf"],
-      "info_path": "cz_customize_info.txt",
-      "info": "This is customized info",
-      "commit_parser": "^(?P<change_type>feature|bug fix):\\s(?P<message>.*)?",
-      "changelog_pattern": "^(feature|bug fix)?(!)?",
-      "change_type_map": {"feature": "Feat", "bug fix": "Fix"},
-      "questions": [
-        {
-          "type": "list",
-          "name": "change_type",
-          "choices": [
-            {
-              "value": "feature",
-              "name": "feat: A new feature. Correlates with MINOR in SemVer"
-            },
-            {
-              "value": "bug fix",
-              "name": "fix: A bug fix. Correlates with PATCH in SemVer"
-            },
-            {
-              "value": "documentation",
-              "name": "docs: Documentation only changes"
-            },
-            {
-              "value": "style",
-              "name": "style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc.)"
-            },
-            {
-              "value": "refactor",
-              "name": "refactor: A code change that neither fixes a bug nor adds a feature"
-            },
-            {
-              "value": "performance",
-              "name": "perf: A code change that improves performance"
-            },
-            {
-              "value": "tests",
-              "name": "test: Addings missing tests or correcting existing tests"
-            },
-            {
-              "value": "build",
-              "name": "build: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)"
-            },
-            {
-              "value": "ci",
-              "name": "ci: Changes to our CI configuration files and scripts (examples scopes: Travis, Circle, BrowserStack, SauceLabs)"
-            },
-            {
-              "value": "chore",
-              "name": "chore: Other changes that don't modify src or test files"
-            }
-          ],
-          "message": "Select the type of change you are committing"
-        },
-        {
-          "type": "input",
-          "name": "show_message",
-          "message": "Provide additional contextual information about the code changes: (press [enter] to skip)"
-        }
-      ]
-    }
+    "major_version_zero": true
   }
 }
