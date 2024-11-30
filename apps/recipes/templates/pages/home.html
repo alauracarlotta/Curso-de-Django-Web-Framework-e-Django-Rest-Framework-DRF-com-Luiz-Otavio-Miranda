@@ -5,6 +5,23 @@
 
 {% block content %}
 
-    <div>{{ name }}</div>
+    {% include "partials/home/search-button.html" %}
+
+    <main class="main-cards-container">
+        <div class="container">
+            <div class="main-cards">
+                <div class="main-cards__list">
+                    <div class="cards"><div>{{ name }}</div></div>
+                    <div class="cards"><div>{{ name }}</div></div>
+                    <div class="cards"><div>{{ name }}</div></div>
+                    <div class="cards"><div>{{ name }}</div></div>
+                    <div class="cards"><div>{{ name }}</div></div>
+                    <div class="cards"><div>{{ name }}</div></div>
+                    <div class="cards"><div>{{ name }}</div></div>
+                    <div class="cards"><div>{{ name }}</div></div>
+                </div>
+            </div>
+        </div>
+    </main>
 
 {% endblock %}
