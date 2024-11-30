@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 def home(request):
     name = 'Laura'
-    return render(request, 'recipes/home.html', 
+    return render(request, 'pages/home.html', 
         context = {
             'name': name    
         }, 
