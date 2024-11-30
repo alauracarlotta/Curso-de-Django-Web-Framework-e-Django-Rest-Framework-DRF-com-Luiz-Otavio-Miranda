@@ -11,14 +11,3 @@ def home(request):
         }, 
         status = 200
     )
-
-def contact(request):
-    teste = 'A vida de Laura é Bela!'
-    return render(request, 'correct/temp.html',
-        context = {
-            'foi': teste
-        }
-    )
-
-def about(request):
-    return HttpResponse("Hello, Django!")
