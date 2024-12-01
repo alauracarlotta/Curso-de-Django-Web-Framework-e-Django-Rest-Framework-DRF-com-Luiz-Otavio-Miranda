@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+
+{% block title %} Receita {%endblock%}
+
+
+{% block content %}
+
+<main class="main-cards-container">
+    <div class="container">
+        <div class="main-cards">
+            {% include "recipes/partials/recipes-detail.html" %}
+        </div>
+    </div>
+</main>
+
+{% endblock %}
