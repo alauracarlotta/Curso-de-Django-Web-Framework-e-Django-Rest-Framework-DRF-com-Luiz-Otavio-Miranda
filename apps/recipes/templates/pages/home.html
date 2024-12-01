@@ -11,14 +11,72 @@
         <div class="container">
             <div class="main-cards">
                 <div class="main-cards__list">
-                    <div class="cards"><div>{{ name }}</div></div>
-                    <div class="cards"><div>{{ name }}</div></div>
-                    <div class="cards"><div>{{ name }}</div></div>
-                    <div class="cards"><div>{{ name }}</div></div>
-                    <div class="cards"><div>{{ name }}</div></div>
-                    <div class="cards"><div>{{ name }}</div></div>
-                    <div class="cards"><div>{{ name }}</div></div>
-                    <div class="cards"><div>{{ name }}</div></div>
+                    <div class="main-cards__list-item">
+                        <div class="recipe-cover">
+                            <img src="https://via.placeholder.com/1280x720.png/269fe6" alt="">
+                        </div>
+                        <div class="recipe-content">
+                            <!-- title -->
+                            <div class="recipe-title">
+                                <h2>Lorem ipsum dolor sit amet.</h2>
+                            </div>
+
+                            <!-- author -->
+                            <div class="recipe-author">
+                                <span class="recipe-author-item author">
+                                    <i class="fas fa-user"></i>
+                                    {{ name }}
+                                </span>
+                                <span class="recipe-author-item date">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    {{ author_date }}
+                                </span>
+                                <span class="recipe-author-item category">
+                                    <a href="/recipes/category/doces">
+                                        <i class="fas fa-layer-group"></i>
+                                        <span>{{ category }}</span>
+                                    </a>
+                                </span>
+                            </div>
+
+                            <!-- description -->
+                            <div class="recipe-description">
+                                <div class="recipe-description__ingredients">
+                                    <h3 class="recipe-description__ingredients_title">
+                                        Ingredientes:
+                                    </h3>
+                                    <ul>
+                                        {% for ingredient in ingredients %}
+                                            <li>{{ ingredient }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="recipe-description__method">
+                                    <h3 class="recipe-description__method_title">
+                                        Modo de Preparo:
+                                    </h3>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa aut consectetur aliquam. Nostrum aspernatur ipsam nesciunt ducimus aliquam. Quam quidem, accusamus explicabo vel perspiciatis nam enim. Eos ab sint amet.
+                                    Harum nobis omnis quo impedit beatae quas quidem ab sit dolor eveniet, voluptate fugiat reprehenderit. Quo repellendus delectus veniam veritatis officia excepturi, obcaecati eos dolorem at voluptatum similique nobis rem!
+                                    Molestiae quae architecto deleniti quia sed possimus corporis quam sint, provident omnis. Soluta, nostrum molestias adipisci accusamus nesciunt optio minus voluptatem? Asperiores nemo voluptatem dolores molestiae alias sapiente sit porro.</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <!-- End for -->
+                    <div class="main-cards__list-item">
+                        <div class="recipe-cover">
+                            <img src="https://via.placeholder.com/1280x720.png/269fe6" alt="">
+                        </div>
+                        <h2>{{ name }}</h2>
+                    </div>
+                    <div class="main-cards__list-item">
+                        <div class="recipe-cover">
+                            <img src="https://via.placeholder.com/1280x720.png/269fe6" alt="">
+                        </div>
+                        <h2>{{ name }}</h2>
+                    </div>
                 </div>
             </div>
         </div>
