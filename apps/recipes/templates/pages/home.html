@@ -11,9 +11,11 @@
         <div class="container">
             <div class="main-cards">
                 <div class="main-cards__list">
+                    {% for cont in '1234' %}
                     <div class="main-cards__list-item">
                         <div class="recipe-cover">
                             <img src="https://via.placeholder.com/1280x720.png/269fe6" alt="">
+                            {{ cont }}
                         </div>
                         <div class="recipe-content">
                             <!-- title -->
@@ -60,23 +62,41 @@
                                     Molestiae quae architecto deleniti quia sed possimus corporis quam sint, provident omnis. Soluta, nostrum molestias adipisci accusamus nesciunt optio minus voluptatem? Asperiores nemo voluptatem dolores molestiae alias sapiente sit porro.</p>
                                 </div>
                             </div>
-                            
+                        </div>
+
+                        <!-- meta -->
+                        <div class="recipe-meta__container">
+                            <div class="recipe-meta recipe-preparation">
+                                <h3 class="recipe-meta__title">
+                                    <i class="fas fa-stopwatch"></i>
+                                    Preparo
+                                </h3>
+                                <div class="recipe-meta-text">
+                                    0 Minutos
+                                </div>
+                            </div>
+                            <div class="recipe-meta recipe-servings">
+                                <h3 class="recipe-meta__title">
+                                    <i class="fas fa-pizza-slice"></i>
+                                    Porções
+                                </h3>
+                                <div class="recipe-meta-text">
+                                    0 Porções
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- see more -->
+                        <div class="recipe-see-more__container">
+                            <div class="recipe-see-more__button">
+                                <i class="fa-solid fa-eye"></i>
+                                <a href="recipe/id/">ver mais...</a>
+                            </div>
                         </div>
                     </div>
+                    {% endfor %}
 
                     <!-- End for -->
-                    <div class="main-cards__list-item">
-                        <div class="recipe-cover">
-                            <img src="https://via.placeholder.com/1280x720.png/269fe6" alt="">
-                        </div>
-                        <h2>{{ name }}</h2>
-                    </div>
-                    <div class="main-cards__list-item">
-                        <div class="recipe-cover">
-                            <img src="https://via.placeholder.com/1280x720.png/269fe6" alt="">
-                        </div>
-                        <h2>{{ name }}</h2>
-                    </div>
                 </div>
             </div>
         </div>
