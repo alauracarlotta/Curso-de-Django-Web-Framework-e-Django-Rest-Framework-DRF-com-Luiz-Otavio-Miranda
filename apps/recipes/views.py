@@ -16,7 +16,7 @@ def home(request):
         '3 xicaras de leite',
         '4 azeitonas'
     ]
-    return render(request, 'pages/home.html', 
+    return render(request, 'recipes/pages/home.html', 
         context = {
             'name': name,
             'author_date': author_date,

@@ -5,7 +5,7 @@
 
 {% block content %}
 
-    {% include "partials/home/search-button.html" %}
+    {% include "recipes/partials/home/search-button.html" %}
 
     <main class="main-cards-container">
         <div class="container">
@@ -88,10 +88,10 @@
 
                         <!-- see more -->
                         <div class="recipe-see-more__container">
-                            <div class="recipe-see-more__button">
+                            <a href="recipe/id/" class="recipe-see-more__button">
                                 <i class="fa-solid fa-eye"></i>
-                                <a href="recipe/id/">ver mais...</a>
-                            </div>
+                                <span>ver mais...</span>
+                            </a>
                         </div>
                     </div>
                     {% endfor %}
