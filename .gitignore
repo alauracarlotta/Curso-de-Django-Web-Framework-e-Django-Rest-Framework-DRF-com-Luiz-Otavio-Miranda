@@ -176,4 +176,3 @@ cython_debug/
 __localcode
 local_settings
 static/
-*example/

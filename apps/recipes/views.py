@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from example.faker_recipe import make_recipe
+from utils.faker_recipe import make_recipe
 
 def home(request):
     return render(request, 'recipes/pages/home.html', context = {
