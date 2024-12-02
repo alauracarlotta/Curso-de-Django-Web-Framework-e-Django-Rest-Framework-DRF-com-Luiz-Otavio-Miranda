@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 
-{% block title %} Receita {%endblock%}
+{% block title %} Home {%endblock%}
 
 
 {% block content %}
@@ -8,7 +8,9 @@
 <main class="main-cards-container">
     <div class="container">
         <div class="main-cards">
-            {% include "recipes/partials/recipes-detail.html" %}
+            <div class="main-cards__detail">
+                {% include "recipes/partials/recipes.html" %}
+            </div>
         </div>
     </div>
 </main>

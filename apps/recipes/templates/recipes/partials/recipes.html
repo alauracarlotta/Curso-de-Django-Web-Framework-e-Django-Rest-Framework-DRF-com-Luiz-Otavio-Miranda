@@ -1,0 +1,96 @@
+<div class="main-cards__list-item">
+    <div class="recipe-cover">
+        <a href="{% url "recipes:recipe" id=recipe.id %}">
+            <img src="{{ recipe.cover.url}}" alt="teste">
+        </a>
+    </div>
+    <div class="recipe-content">
+        <!-- title -->
+        <div class="recipe-title">
+            <a class="recipe-title__link" href="{% url "recipes:recipe" id=recipe.id %}">
+                <h2>{{ recipe.title }}</h2>
+            </a>
+        </div>
+
+        <!-- author -->
+        <div class="recipe-author">
+            <span class="recipe-author-item author">
+                <i class="fas fa-user"></i>
+                {{ recipe.author.first_name }} {{ recipe.author.last_name }}
+            </span>
+            <span class="recipe-author-item date">
+                <i class="fas fa-calendar-alt"></i>
+                {{ recipe.created_at | date:"d/m/Y" }} às {{ recipe.created_at | date:"H:i" }}
+            </span>
+            <span class="recipe-author-item category">
+                <a href="/recipes/category/doces">
+                    <i class="fas fa-layer-group"></i>
+                    <span>{{ recipe.cathegory.name }}</span>
+                </a>
+            </span>
+        </div>
+
+        <!-- description -->
+        <div class="recipe-description">
+            <p class="recipe-description__content">
+                {{ recipe.description }}
+            </p>
+        </div>
+    </div>
+
+    <!-- meta -->
+    <div class="recipe-meta__container">
+        <div class="recipe-meta recipe-preparation">
+            <h3 class="recipe-meta__title">
+                <i class="fas fa-stopwatch"></i>
+                Preparo
+            </h3>
+            <div class="recipe-meta-text">
+                {{ recipe.preparation_time }} {{recipe.preparation_time_unit}}
+            </div>
+        </div>
+        <div class="recipe-meta recipe-servings">
+            <h3 class="recipe-meta__title">
+                <i class="fas fa-pizza-slice"></i>
+                Porções
+            </h3>
+            <div class="recipe-meta-text">
+                {{ recipe.servings }} {{ recipe.servings_unit }}
+            </div>
+        </div>
+    </div>
+
+    <!-- see more -->
+    {% if is_detail_page is not True %}
+    <div class="recipe-see-more__container">
+        <a href="{% url "recipes:recipe" id=recipe.id %}" class="recipe-see-more__button">
+            <i class="fa-solid fa-eye"></i>
+            <span>ver mais...</span>
+        </a>
+    </div>
+    {% endif %}
+
+    <!-- preparation steps -->
+    {% if is_detail_page %}
+        <div class="recipe-preparation-steps">
+            <div class="recipe-preparation-steps__ingredients">
+                <h3 class="recipe-preparation-steps__ingredients_title">
+                    Ingredientes:
+                </h3>
+                <ul>
+                    {% for ingredient in ingredients %}
+                        <li>{{ ingredient }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="recipe-preparation-steps__method">
+                <h3 class="recipe-preparation-steps__method_title">
+                    Modo de Preparo:
+                </h3>
+                <p class="recipe-preparation-steps__method_content">
+                    {{ recipe.preparation_steps }}
+                </p>
+            </div>
+        </div>
+    {% endif %}
+</div>

@@ -5,14 +5,16 @@
 
 {% block content %}
 
-    
-
-    <main class="main-cards-container">
-        <div class="container">
-            <div class="main-cards">
-                {% include "recipes/partials/home/recipes-grid.html" %}
+<main class="main-cards-container">
+    <div class="container">
+        <div class="main-cards">
+            <div class="main-cards__list">
+                {% for recipe in recipes %}
+                    {% include "recipes/partials/recipes.html" %}
+                {% endfor %}
             </div>
         </div>
-    </main>
+    </div>
+</main>
 
 {% endblock %}
