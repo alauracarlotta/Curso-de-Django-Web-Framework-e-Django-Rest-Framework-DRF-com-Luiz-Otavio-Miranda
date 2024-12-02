@@ -6,9 +6,9 @@ class Author(models.Model):
     pass
 
 
-class Category(models.TextChoices):
-    # name = models.CharField(max_length = 50)
-    CAKES = 'BOLOS', 'BOLOS'
+class Category(models.Model):
+    name = models.CharField(max_length = 50)
+    """ CAKES = 'BOLOS', 'BOLOS'
     PIES = 'TORTAS', 'TORTAS'
     DESSERT = 'SOBREMESA', 'SOBREMESA'
     FAST = 'RÁPIDAS', 'RÁPIDAS'
@@ -22,7 +22,15 @@ class Category(models.TextChoices):
     DRINKS = 'BEBIDAS', 'BEBIDAS'
     HEALTHY_EATING = 'COMIDA_SAUDÁVEL', 'COMIDA_SAUDÁVEL'
     SINGLE_DISH = 'PRATO_ÚNICO', 'PRATO_ÚNICO'
-    OTHERS = 'OUTROS', 'OUTROS'
+    OTHERS = 'OUTROS', 'OUTROS' """
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = 'Caterory'
+        verbose_name_plural = 'Categories'
+        ordering = ['-id']
 
 
 class Recipe(models.Model):
@@ -41,5 +49,6 @@ class Recipe(models.Model):
     updated_at = models.DateTimeField(auto_now = True)
     is_published = models.BooleanField(default = False)
     cover = models.ImageField(upload_to = 'recipes/covers/%Y/%m/%d/')
-    category = models.CharField(max_length = 100, choices = Category.choices)
+    # category = models.CharField(max_length = 100, choices = Category.choices)
+    category = models.ForeignKey(Category, on_delete = models.SET_NULL, null = True)
     author = models.ForeignKey(auth_models.User, on_delete = models.SET_NULL, null = True)
