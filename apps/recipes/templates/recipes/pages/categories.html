@@ -5,22 +5,28 @@
 
 {% block content %}
 
-<main class="main-cards-container">
-    <div class="container">
-        <div class="main-cards">
-            <div class="main-cards__list">
-                {% for recipe in recipes %}
-                    {% if recipes|length == 1 %}
-                        <div class="center">
+{% if recipes %}
+    <main class="main-cards-container">
+        <div class="container">
+            <div class="main-cards">
+                <div class="main-cards__list">
+                    {% for recipe in recipes %}
+                        {% if recipes|length == 1 %}
+                            <div class="center">
+                                {% include "recipes/partials/recipes.html" %}
+                            </div>
+                        {% else %}
                             {% include "recipes/partials/recipes.html" %}
-                        </div>
-                    {% else %}
-                        {% include "recipes/partials/recipes.html" %}
-                    {% endif %}
-                {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
+    </main>
+{% else %}
+    <div class="not-found__error">
+        <h1> {{ error }} </h1>
     </div>
-</main>
+{% endif %}
 
 {% endblock %}
