@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+
+{% block title %} {{ title }} {%endblock%}
+
+
+{% block content %}
+
+<main class="main-cards-container">
+    <div class="container">
+        <div class="main-cards">
+            <div class="main-cards__list">
+                {% for recipe in recipes %}
+                    {% if recipes|length == 1 %}
+                        <div class="center">
+                            {% include "recipes/partials/recipes.html" %}
+                        </div>
+                    {% else %}
+                        {% include "recipes/partials/recipes.html" %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

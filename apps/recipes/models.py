@@ -39,8 +39,8 @@ class Recipe(models.Model):
     slug = models.SlugField()
     preparation_time = models.IntegerField()
     preparation_time_unit = models.CharField(max_length = 80) # futuro select
-    severings = models.IntegerField()
-    severings_unit = models.CharField(max_length = 80) # futuro select
+    servings = models.IntegerField()
+    servings_unit = models.CharField(max_length = 80) # futuro select
     # ingredients = models.IntegerField()
     # ingredients_unit = models.CharField(max_length = 80) # futuro select
     preparation_step = models.TextField()
@@ -48,10 +48,10 @@ class Recipe(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     is_published = models.BooleanField(default = False)
-    cover = models.ImageField(upload_to = 'recipes/covers/%Y/%m/%d/')
+    cover = models.ImageField(upload_to = 'recipes/covers/%Y/%m/%d/', blank = True, default = '')
     # category = models.CharField(max_length = 100, choices = Category.choices)
-    category = models.ForeignKey(Category, on_delete = models.SET_NULL, null = True)
-    author = models.ForeignKey(auth_models.User, on_delete = models.SET_NULL, null = True)
+    category = models.ForeignKey(Category, on_delete = models.SET_NULL, null = True, blank = True, default = None)
+    author = models.ForeignKey(auth_models.User, on_delete = models.SET_NULL, null = True, blank = True, default = None)
     
     def __str__(self):
         return f'{self.title} by {self.author}'
