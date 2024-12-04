@@ -72,6 +72,12 @@
         </div>
     </div>
 
+    {% if recipe.id == 9 and is_detail_page is not True %}
+        <div class="youtube">
+            <iframe width="280" height="157.5" src="https://www.youtube.com/embed/A4IqM6AV7BE?si=8lO9qjJKUBDXL-cA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+        </div>
+    {% endif %}
+
     <!-- see more -->
     {% if is_detail_page is not True %}
     <div class="recipe-see-more__container">
@@ -99,9 +105,15 @@
                 <h3 class="recipe-preparation-steps__method_title">
                     Modo de Preparo:
                 </h3>
-                <p class="recipe-preparation-steps__method_content">
-                    {{ recipe.preparation_steps }}
-                </p>
+                {% if recipe.preparation_step_is_html %}
+                    <span class="recipe-preparation-steps__method_content">
+                        {{ recipe.preparation_step|safe }}
+                    </span>
+                {% else %}
+                    <span class="recipe-preparation-steps__method_content">
+                        {{ recipe.preparation_step|linebreaksbr }}
+                    </span>
+                {% endif %}
             </div>
         </div>
     {% endif %}
