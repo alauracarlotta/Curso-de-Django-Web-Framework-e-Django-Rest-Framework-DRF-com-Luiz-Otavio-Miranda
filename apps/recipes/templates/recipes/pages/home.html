@@ -11,6 +11,10 @@
             <div class="main-cards__list">
                 {% for recipe in recipes %}
                     {% include "recipes/partials/recipes.html" %}
+                {% empty %}
+                    <div class="center">
+                        <h1>No recipes found here</h1>
+                    </div>
                 {% endfor %}
             </div>
         </div>
