@@ -28,13 +28,19 @@ def category(request, category_id):
 
 
 def recipes(request, id):
+    recipe = Recipe.objects.filter(
+        pk=id,
+        is_published=True
+    ).order_by('id').first()
+
     ingredients = [
         '2 ovos',
         '3 xicaras de leite',
         '4 azeitonas'
     ]
     return render(request, 'recipes/pages/recipe-view.html', context={
-        'recipe': make_recipe(),
+        'recipe': recipe,
+        'title': recipe.title,
         'ingredients': ingredients,
-        'is_detail_page': True
+        'is_detail_page': True,
     })
