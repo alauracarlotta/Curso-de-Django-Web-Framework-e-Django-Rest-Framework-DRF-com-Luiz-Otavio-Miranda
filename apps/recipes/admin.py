@@ -5,8 +5,11 @@ from .models import Category, Recipe
 class CategoryAdmin(admin.ModelAdmin):
     ...
 
+
 @admin.register(Recipe)
-class Recipe(admin.ModelAdmin):
+
+class Recipe(admin.ModelAdmin): # noqa
     ...
+
 
 admin.site.register(Category, CategoryAdmin)

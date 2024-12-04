@@ -54,9 +54,13 @@ class Recipe(models.Model):
     )
     # category = models.CharField(max_length = 100, choices = Category.choices)
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True, blank=True, default=None)
+        Category, on_delete=models.SET_NULL, null=True, blank=True,
+        default=None
+    )
     author = models.ForeignKey(
-        auth_models.User, on_delete=models.SET_NULL, null=True, blank=True, default=None)
+        auth_models.User, on_delete=models.SET_NULL, null=True, blank=True,
+        default=None
+    )
 
     def __str__(self):
         return f'{self.title} by {self.author}'
