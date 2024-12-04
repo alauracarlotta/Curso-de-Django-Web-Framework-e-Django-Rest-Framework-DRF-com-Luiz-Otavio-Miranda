@@ -28,10 +28,7 @@ def category(request, category_id):
 
 
 def recipes(request, id):
-    recipe = Recipe.objects.filter(
-        pk=id,
-        is_published=True
-    ).order_by('id').first()
+    recipe = get_object_or_404(Recipe, pk=id, is_published=True,)
 
     ingredients = [
         '2 ovos',
