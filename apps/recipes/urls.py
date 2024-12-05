@@ -1,7 +1,6 @@
 from django.urls import path
 from apps.recipes import views
 
-app_name = 'recipes'
 
 urlpatterns = [
     path(
@@ -10,7 +9,7 @@ urlpatterns = [
         name='home'
     ),
     path(
-        'recipe/category/<int:category_id>/',
+        'category/<int:category_id>/',
         views.category,
         name='category'
     ),

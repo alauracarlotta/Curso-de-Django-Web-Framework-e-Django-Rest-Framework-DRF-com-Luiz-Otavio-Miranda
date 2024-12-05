@@ -1,7 +1,7 @@
 <div class="main-cards__list-item">
     {% if recipe.cover %}
         <div class="recipe-cover">
-            <a href="{% url "recipes:recipe" id=recipe.id %}">
+            <a href="{% url 'recipe' id=recipe.id %}">
                 <img src="{{ recipe.cover.url}}" alt="teste">
             </a>
         </div>
@@ -9,7 +9,7 @@
     <div class="recipe-content">
         <!-- title -->
         <div class="recipe-title">
-            <a class="recipe-title__link" href="{% url "recipes:recipe" id=recipe.id %}">
+            <a class="recipe-title__link" href="{% url 'recipe' id=recipe.id %}">
                 <h2>{{ recipe.title }}</h2>
             </a>
         </div>
@@ -34,7 +34,7 @@
             </span>
             {% if recipe.category is not None %}
                 <span class="recipe-author-item category">
-                    <a href="{% url "recipes:category" recipe.category.id %}">
+                    <a href="{% url 'category' recipe.category.id %}">
                         <i class="fas fa-layer-group"></i>
                         <span>{{ recipe.category.name }}</span>
                     </a>
@@ -81,7 +81,7 @@
     <!-- see more -->
     {% if is_detail_page is not True %}
     <div class="recipe-see-more__container">
-        <a href="{% url "recipes:recipe" id=recipe.id %}" class="recipe-see-more__button">
+        <a href="{% url 'recipe' id=recipe.id %}" class="recipe-see-more__button">
             <i class="fa-solid fa-eye"></i>
             <span>ver mais...</span>
         </a>
