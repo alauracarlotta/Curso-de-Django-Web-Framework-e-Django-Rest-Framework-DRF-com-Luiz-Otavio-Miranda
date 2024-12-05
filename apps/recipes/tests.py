@@ -2,7 +2,18 @@ from django.test import TestCase
 
 
 class RecipeURLsTest(TestCase):
-    def test_pytest_is_ok(self):
-        # var_test = 30 (inserir breakpoint abaixo dessa var e usar o debug)
-        print('OLÁ, MUNDO!')
-        assert 1 == 1
+    def test_recipe_home_page_url_is_correct(self):
+        url = reverse('home')
+        self.assertEqual(url, '/')
+
+    def test_recipe_category_page_url_is_correct(self):
+        url = reverse('category', kwargs={
+            'category_id': 1
+        })
+        self.assertEqual(url, '/category/1/')
+
+    def test_recipe_detail_page_url_is_correct(self):
+        url = reverse('recipe', kwargs={
+            'id': 1
+        })
+        self.assertEqual(url, '/recipe/1/')
