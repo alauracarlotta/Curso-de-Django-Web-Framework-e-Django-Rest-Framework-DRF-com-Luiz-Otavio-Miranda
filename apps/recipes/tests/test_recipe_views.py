@@ -1,0 +1,26 @@
+from django.test import TestCase
+from django.urls import resolve, reverse
+
+from apps.recipes import views
+
+
+class RecipeViewsTest(TestCase):
+    def test_recipe_home_view_function_is_correct(self):
+        view = resolve(reverse('home'))
+        self.assertIs(view.func, views.home)
+
+    def test_recipe_category_view_function_is_correct(self):
+        view = resolve(
+            reverse('category', kwargs={
+                'category_id': 1
+            })
+        )
+        self.assertIs(view.func, views.category)
+
+    def test_recipe_details_view_function_is_correct(self):
+        view = resolve(
+            reverse('recipe', kwargs={
+                'id': 1
+            })
+        )
+        self.assertIs(view.func, views.recipes)
