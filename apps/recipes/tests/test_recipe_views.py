@@ -1,20 +1,22 @@
-from django.test import TestCase
 from django.urls import resolve, reverse
-
 from apps.recipes import views
+from .test_recipe_base import RecipeTestBase
 # from apps.recipes.models import Recipe, Category, auth_models
-from apps.recipes.models import Recipe, Category, User
 
 
-class RecipeViewsTest(TestCase):
+class RecipeViewsTest(RecipeTestBase):
+    """ def tearDown(self) -> None:
+        return super().tearDown() """
 
     # ----------------------------------
     #               HOME
     # ----------------------------------
     # view function is correct
+    #   ---> setup()
     def test_home_view_function_is_correct(self):
         view = resolve(reverse('home'))
         self.assertIs(view.func, views.home)
+    #   ---> teardown()
 
     # view status code == 200
     def test_home_view_returns_status_code_200_ok(self):
@@ -23,6 +25,7 @@ class RecipeViewsTest(TestCase):
 
     # error msg template == 404
     def test_home_template_shows_no_recipes_found_if_no_recipes_404(self):
+        # Recipe.objects.get(pk=1).delete()
         response = self.client.get(reverse('home'))
         self.assertIn(
             'No recipes found here',
@@ -38,29 +41,19 @@ class RecipeViewsTest(TestCase):
         # category = Category(name='Fast Food')
         # category.save()
         # category.full_clean()
-        category = Category.objects.create(name='Datas Especiais')
-        author = User.objects.create_user(
-            first_name='Maria',
-            last_name='Antônia',
-            username='mariaantonia',
-            password='Varekai**963,',
-            email='maria@antonia.com',
-        )
-        recipe = Recipe.objects.create(
-            title='Receita de Sorvete',
-            description='Receita muito boa, caseira, barata e que rende horrores', # noqa
-            slug='receita-de-sorvete',
-            preparation_time=60,
-            preparation_time_unit='minutos',
-            servings=20,
-            servings_unit='pessoas',
-            preparation_step='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio illum voluptate neque , voluptas maxime sit itaque, corrupti debitis saepe repellat rerum, eveniet beatae odio at dolorem fugiat quam non vero!', # noqa
-            preparation_step_is_html=False,
-            is_published=True,
-            category=category,
-            author=author,
-        )
-        assert 1 == 1
+        # self.make_recipe(
+        #     title='Receita de Sorvete',
+        #     category_data={
+        #         'name': 'Fast Food'
+        #         }
+        # )
+        self.make_recipe()
+        response = self.client.get(reverse('home'))
+        response_recipes = response.context['recipes']
+        response_context = response.content.decode('utf-8')
+        self.assertEqual(len(response.context['recipes']), 1)
+        # self.assertEqual(response_recipes.first().title, 'Receita de Sorvete')
+        # self.assertIn('Receita de Sorvete', response_context)
 
     # ----------------------------------
     #               CATEGORY
