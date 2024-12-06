@@ -5,18 +5,13 @@ from .test_recipe_base import RecipeTestBase
 
 
 class RecipeViewsTest(RecipeTestBase):
-    """ def tearDown(self) -> None:
-        return super().tearDown() """
-
     # ----------------------------------
     #               HOME
     # ----------------------------------
     # view function is correct
-    #   ---> setup()
     def test_home_view_function_is_correct(self):
         view = resolve(reverse('home'))
         self.assertIs(view.func, views.home)
-    #   ---> teardown()
 
     # view status code == 200
     def test_home_view_returns_status_code_200_ok(self):
@@ -38,22 +33,18 @@ class RecipeViewsTest(RecipeTestBase):
         self.assertTemplateUsed(response, 'recipes/pages/home.html')
 
     def test_home_template_loads_recipes(self):
-        # category = Category(name='Fast Food')
-        # category.save()
-        # category.full_clean()
-        # self.make_recipe(
-        #     title='Receita de Sorvete',
-        #     category_data={
-        #         'name': 'Fast Food'
-        #         }
-        # )
-        self.make_recipe()
+        self.make_recipe(
+            title='Receita de Sorvete',
+            category_data={
+                'name': 'Fast Food'
+                }
+        )
         response = self.client.get(reverse('home'))
         response_recipes = response.context['recipes']
         response_context = response.content.decode('utf-8')
         self.assertEqual(len(response.context['recipes']), 1)
-        # self.assertEqual(response_recipes.first().title, 'Receita de Sorvete')
-        # self.assertIn('Receita de Sorvete', response_context)
+        self.assertEqual(response_recipes.first().title, 'Receita de Sorvete')
+        self.assertIn('Receita de Sorvete', response_context)
 
     # ----------------------------------
     #               CATEGORY
