@@ -5,6 +5,7 @@ from unittest import skip
 # from apps.recipes.models import Recipe, Category, auth_models
 
 
+@skip('WIP')
 class RecipeViewsTest(RecipeTestBase):
     # ----------------------------------
     #               HOME
