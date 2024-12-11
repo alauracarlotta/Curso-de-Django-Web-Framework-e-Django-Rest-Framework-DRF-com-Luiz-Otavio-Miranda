@@ -4,7 +4,9 @@ from django.test import TestCase
 from django.urls import path, reverse, resolve
 
 from apps.recipes import views
-from apps.recipes.models import Recipe
+# from apps.recipes.models import Recipe, Category, User
+from apps.recipes.models import Recipe, Category
+from django.contrib.auth.models import User
 
 """
 O QUE É TESTADO NO DJANGO?
@@ -200,6 +202,62 @@ class RecipesViewsTest(TestCase):
     def test_view_home_carrega_o_template_correto(self):
         response = self.client.get(reverse('home'))
         self.assertTemplateUsed(response, 'recipes/pages/home.html')
+
+    # TESTE 13:
+    # Verifica template com as receitas (precisa criar receita)
+    # 1 - importa os models
+    # 2 - cria categoria, autor e receita
+    # 3 - executa a view com self.client.get
+    # 4 - conforme a response da view, testamos o contexto dela (nesse caso
+    #       sendo 'recipes'. "Eu tenho essa 'recipe' dentro desse contexto?")
+    def test_view_home_template_com_receitas_carregadas(self):
+        # NOTE¹ => com o .create, a categoria é criada e já salva ...
+        categoria = Category.objects.create(name='Categoria Teste')  # NOTE¹
+        # NOTE² => Já da maneira abaixo é necessário salvar a criação com .save
+        # categoria = Category(name='Categoria Teste 2')
+        # categoria.full_clean()  # NOTE³
+        # NOTE³ => Com o full clean, podemos colocar validações
+        # categoria.save()  # NOTE²
+        autor = User.objects.create_user(
+            first_name='Nome Usuário Teste',
+            last_name='Sobrenome Usuário Teste',
+            username='usuariotesteusername',
+            email='usuarioteste@email.com',
+            password='123456789',
+        )
+        receita = Recipe.objects.create(  # noqa
+            title='Receita Teste Título',
+            description='Descrição da Receita',
+            slug='receita-teste-slug',
+            preparation_time=10,
+            preparation_time_unit='minutos',
+            servings=2,
+            servings_unit='pessoas',
+            preparation_step='Passo-a-passo da preparação da receita teste',
+            preparation_step_is_html=False,
+            is_published=True,
+            category=categoria,
+            author=autor,
+        )
+        # =========================================
+        #           TESTE DE CONTEXTO
+        # =========================================
+        # Executo a view (que foi criada)
+        response = self.client.get(reverse('home'))
+        response_context = response.context['recipes'].first()
+        response_content = response.content.decode('utf-8')
+        # response_content = response.content
+        # print('lalalalalal 1', type(response_content))
+        # print('lalalalalal 2', type(response_content.decode('utf-8')))
+        # A quantidade de receitas que eu criei foi == 1?
+        self.assertEqual(len(response.context['recipes']), 1)
+        # O título da receita foi o registrado?
+        self.assertEqual(response_context.title, 'Receita Teste Título')
+        # Eu executei a view e conforme a response dela, ela exibiu algum valor
+        # no template na tela?
+        self.assertIn('Receita Teste Título', response_content)
+        ...
+
 
 # =============================================================================
     # @fixture => criar dados para os testes
