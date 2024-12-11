@@ -1,9 +1,7 @@
-from unittest import skip
 from django.test import TestCase
 from django.urls import reverse
 
 
-@skip('WIP')
 class RecipeURLsTest(TestCase):
     def test_recipe_home_page_url_is_correct(self):
         url = reverse('home')
