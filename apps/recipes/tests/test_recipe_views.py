@@ -30,6 +30,7 @@ class RecipeViewsTest(RecipeTestBase):
         self.assertTemplateUsed(response, 'recipes/pages/home.html')
 
     def test_home_template_loads_recipes(self):
+        # PARAMETRIZAÇÃO
         """ NEED A RECIPE FOR THIS TEST - create the recipe """
         """ ...PRECISA DE UMA RECEITA PARA ESSE TESTE - cria a receita """
         self.make_recipe(
@@ -63,6 +64,27 @@ class RecipeViewsTest(RecipeTestBase):
         )
         self.assertIs(view.func, views.category)
 
+    def test_category_template_loads_recipes(self):
+        # PARAMETRIZAÇÃO
+        self.make_recipe(
+            category_data={
+                'name': 'Category Test'
+            }
+        )
+        response = self.client.get(  # noqa
+            reverse(
+                'category',
+                kwargs={
+                    'category_id': 1
+                }
+            )
+        )
+        response_recipes = response.context['recipes']
+        response_context = response.content.decode('utf-8')
+
+        self.assertEqual(response_recipes[0].category.name, 'Category Test')
+        self.assertIn('Category Test', response_context)
+
     def test_category_view_returns_404_if_no_category_found(self):
         response = self.client.get(reverse('category', kwargs={
                 'category_id': 9999
@@ -77,6 +99,11 @@ class RecipeViewsTest(RecipeTestBase):
             })
         )
         self.assertIs(view.func, views.recipes)
+
+    # TODO:
+    def test_detail_template_loads_recipes(self):
+        self.make_recipe()
+        # WIP
 
     def test_detail_view_returns_404_if_no_detail_found(self):
         response = self.client.get(reverse('recipe', kwargs={
