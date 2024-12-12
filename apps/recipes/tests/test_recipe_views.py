@@ -1,7 +1,7 @@
 from django.urls import resolve, reverse
 from apps.recipes import views
 from .test_recipe_base import RecipeTestBase
-from unittest import skip
+from unittest import skip  # noqa
 # from apps.recipes.models import Recipe, Category, auth_models
 
 

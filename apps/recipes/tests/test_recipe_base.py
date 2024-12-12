@@ -3,8 +3,8 @@ from apps.recipes.models import Category, Recipe, User
 
 
 class RecipeTestBase(TestCase):
-    def setUp(self) -> None:
-        return super().setUp()
+    """ def setUp(self) -> None:
+        return super().setUp() """
 
     def make_category(self, name='Categoria'):
         return Category.objects.create(name=name)
