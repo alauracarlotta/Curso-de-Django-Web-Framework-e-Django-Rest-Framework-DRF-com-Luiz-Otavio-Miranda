@@ -29,7 +29,7 @@ class RecipeViewsTest(RecipeTestBase):
         response = self.client.get(reverse('home'))
         self.assertTemplateUsed(response, 'recipes/pages/home.html')
 
-    def test_home_template_loads_recipes(self):
+    def test_home_template_loads_the_correct_recipes(self):
         # PARAMETRIZAÇÃO
         """ NEED A RECIPE FOR THIS TEST - create the recipe """
         """ ...PRECISA DE UMA RECEITA PARA ESSE TESTE - cria a receita """
@@ -55,6 +55,17 @@ class RecipeViewsTest(RecipeTestBase):
         """ ... Checa se 1 receita é encontrada no códogp do template """
         self.assertIn('Receita de Sorvete', response_context)
 
+    def test_home_template_dont_load_recipes_not_published(self):
+        # Test recipe dont show when recipe is_published == False
+        self.make_recipe(is_published=False)
+
+        response = self.client.get(reverse('home'))
+        content = response.content.decode('utf-8')
+        self.assertIn(
+            'No recipes found here',
+            content
+        )
+
     # CATEGORY
     def test_category_view_function_is_correct(self):
         view = resolve(
@@ -64,7 +75,7 @@ class RecipeViewsTest(RecipeTestBase):
         )
         self.assertIs(view.func, views.category)
 
-    def test_category_template_loads_recipes(self):
+    def test_category_template_loads_the_correct_recipes(self):
         # PARAMETRIZAÇÃO
         self.make_recipe(
             category_data={
@@ -91,6 +102,19 @@ class RecipeViewsTest(RecipeTestBase):
             }))
         self.assertEqual(response.status_code, 404)
 
+    def test_category_template_dont_load_recipes_not_published(self):
+        recipe = self.make_recipe(is_published=False)
+
+        response = self.client.get(
+            reverse(
+                'category',
+                kwargs={
+                    'category_id': recipe.category.id
+                }
+            )
+        )
+        self.assertEqual(response.status_code, 404)
+
     # DETAILS
     def test_details_view_function_is_correct(self):
         view = resolve(
@@ -100,13 +124,39 @@ class RecipeViewsTest(RecipeTestBase):
         )
         self.assertIs(view.func, views.recipes)
 
-    # TODO:
-    def test_detail_template_loads_recipes(self):
-        self.make_recipe()
-        # WIP
+    def test_detail_template_loads_the_correct_recipes(self):
+        needed_title = 'Receita Teste'
+        self.make_recipe(
+            title=needed_title
+        )
+        response = self.client.get(
+            reverse(
+                'recipe', kwargs={
+                    'id': 1
+                }
+            )
+        )
+        response_recipes = response.context['recipe']
+        response_context = response.content.decode('utf-8')
+
+        self.assertEqual(response_recipes.title, needed_title)
+        self.assertIn(needed_title, response_context)
 
     def test_detail_view_returns_404_if_no_detail_found(self):
         response = self.client.get(reverse('recipe', kwargs={
                 'id': 9999
             }))
+        self.assertEqual(response.status_code, 404)
+
+    def test_detail_template_dont_load_recipes_not_published(self):
+        recipe = self.make_recipe(is_published=False)
+
+        response = self.client.get(
+            reverse(
+                'recipe',
+                kwargs={
+                    'id': recipe.id
+                }
+            )
+        )
         self.assertEqual(response.status_code, 404)
