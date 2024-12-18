@@ -66,6 +66,7 @@ class RecipeModelsTest(RecipeTestBase):
         with self.assertRaises(ValidationError):
             self.recipe.full_clean()
 
+    # Meu teste, testa o motor do django...
     @parameterized.expand([
         ('preparation_step_is_html', False),
         ('is_published', False),
@@ -86,11 +87,18 @@ class RecipeModelsTest(RecipeTestBase):
         )
 
     def test_recipe_is_published_is_false(self):
-        # não podemos usar a mesma do setup, isso porque como deixamos os
-        # valores defaults, estariamos testando o motor do django e não a
-        # funcionalidade em si.
         recipe = self.make_recipe_no_default()
         self.assertFalse(
             recipe.is_published,
             msg='Recipe is_published is not False'
+        )
+
+    def test_recpe_str_representation(self):
+        self.recipe.title = 'Título da receita'
+        self.recipe.author.username = 'autordareceita'
+        self.recipe.full_clean()
+        self.recipe.save()
+        self.assertEqual(
+            str(self.recipe),
+            f'{self.recipe.title} by {self.recipe.author.username}'
         )
