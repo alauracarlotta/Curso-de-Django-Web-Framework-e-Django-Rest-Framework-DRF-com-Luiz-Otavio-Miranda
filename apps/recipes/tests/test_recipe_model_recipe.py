@@ -9,10 +9,11 @@ class RecipeModelsTest(RecipeTestBase):
         return super().setUp()
 
     def make_recipe_no_default(self):
+        id = 0
         recipe = Recipe(
             title='Título da Receita',
             description='Descrição da Receita',
-            slug='receita-slug',
+            slug=f'receita-slug-{id + 1}',
             preparation_time=60,
             preparation_time_unit='Minutos',
             servings=4,
