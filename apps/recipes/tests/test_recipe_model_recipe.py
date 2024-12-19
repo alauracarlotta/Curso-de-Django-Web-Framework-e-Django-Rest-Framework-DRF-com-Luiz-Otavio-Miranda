@@ -93,7 +93,7 @@ class RecipeModelsTest(RecipeTestBase):
             msg='Recipe is_published is not False'
         )
 
-    def test_recpe_str_representation(self):
+    def test_recipe_model_string_representation(self):
         self.recipe.title = 'Título da receita'
         self.recipe.author.username = 'autordareceita'
         self.recipe.full_clean()
